@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {
+    "kreait/firebase-php": "^5.26",
+    "google/cloud-firestore": "^1.41",
+    "google/cloud-core": "^1.43"
+  }
+}
