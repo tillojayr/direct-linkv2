@@ -112,9 +112,10 @@ if (!isset($_SESSION['seeker_has_login'])) {
       <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
           <h2 class="h2 mb-2 page-title">Company Profile</h2>
+          <hr class="my-4" />
           <div class="my-2">
-            <form id="profile_form">
-              <div class="row mt-5 align-items-center">
+            <form id="company_profile_form">
+              <div class="d-flex justify-content-center">
                 <div class="col-md-4 text-center mb-5">
                   <div class="avatar avatar-xl">
                     <img
@@ -127,12 +128,13 @@ if (!isset($_SESSION['seeker_has_login'])) {
                     <input class="form-control" accept="image/png, image/gif, image/jpeg" type="file" id="profile" name="profile">
                   </div>
                 </div>
+              </div>
+              <div class="row mt-1 align-items-center">
                 <div class="col">
-                  <div class="row align-items-center">
-                    <div class="col-md-7">
-                      <h3 class="mb-1" id="name"></h3>
+                  <div class="align-items-center">
+                    <div class="">
+                      <h1 class="mb-1 text-center" id="name"></h1>
                       <p class="small mb-3">
-                        <span class="badge badge-dark">New York, USA</span>
                       </p>
                     </div>
                   </div>
@@ -145,13 +147,9 @@ if (!isset($_SESSION['seeker_has_login'])) {
               </div>
               <hr class="my-4" />
               <div class="row mb-3">
-                <div class="col-lg-6">
-                  <label class="form-label mb-0" for="firstname">Firstname</label>
-                  <input type="text" id="firstname" name="firstname" class="form-control"/>
-                </div>
-                <div class="col-lg-6">
-                  <label for="lastname">Lastname</label>
-                  <input type="text" id="lastname" name="lastname" class="form-control"/>
+                <div class="col">
+                  <label class="form-label mb-0" for="company_name">Company Name</label>
+                  <input type="text" id="company_name" name="company_name" class="form-control"/>
                 </div>
               </div>
               <div class="row mb-3">
@@ -160,58 +158,26 @@ if (!isset($_SESSION['seeker_has_login'])) {
                   <input type="email" class="form-control" id="email" name="email"/>
                 </div>
                 <div class="form-group col-lg-6">
-                  <label for="phone_number">Phone Number</label>
-                  <input type="number" class="form-control" id="phone_number" name="phone_number"/>
+                  <label for="contact_number">Contact Number</label>
+                  <input type="number" class="form-control" id="contact_number" name="contact_number"/>
                 </div>
               </div>
               <div class="form-group mb-3">
-                <label for="address">Address</label>
+                <label for="address">Company Address</label>
                 <input type="text" class="form-control" id="address" name="address"/>
               </div>
               <div class="row mb-3">
-                <div class="col">
-                  <label for="company">Company</label>
-                  <input type="text" class="form-control" id="company" name="company"/>
-                </div>
-              </div>
-              <div class="row mb-3">
                 <div class="col-lg-6">
-                  <label for="project_links">Project Links</label>
-                  <input type="text" class="form-control" id="project_links" name="project_links"/>
+                  <label for="website">Website</label>
+                  <input type="text" class="form-control" id="website" name="website"/>
                 </div>
                 <div class="col-lg-6">
-                  <label for="linkedin">LinkedIn</label>
-                  <input type="text" class="form-control" id="linkedin" name="linkedin"/>
+                  <label for="social_media">Social Media</label>
+                  <input type="text" class="form-control" id="social_media" name="social_media"/>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="title">Title <small>(Ex. Software Engineer)</small></label>
-                  <input type="text" class="form-control" id="title" name="title"/>
-                </div>
-              </div>
-              <hr class="my-4" />
-              <div class="mb-3">
-                <label for="skills" class="form-label">Skills <small>(List all your skills)</small></label>
-                <textarea class="form-control" id="skills" rows="4" name="skills"></textarea>
-              </div>
-              <hr class="my-4" />
-              <div class="mb-3">
-                <label for="educ_background" class="form-label">Educational Background</label>
-                <textarea class="form-control" id="educ_background" name="educ_background" rows="4"></textarea>
-              </div>
-              <hr class="my-4" />
-              <div class="mb-3">
-                <label for="work_history" class="form-label">Work History <small>(N/A if none)</small></label>
-                <textarea class="form-control" id="work_history" name="work_history" rows="4"></textarea>
-              </div>
-              <hr class="my-4" />
-              <div class="mb-5">
-                <label for="other_info" class="form-label">Other information / Achievements</label>
-                <textarea class="form-control" id="other_info" name="other_info" rows="4"></textarea>
               </div>
               <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary" id="profile_submit_button">Save Changes</button>
+                <button type="submit" class="btn btn-primary" id="company_profile_submit_button">Save Changes</button>
               </div>
             </form>
           </div>
@@ -227,7 +193,7 @@ if (!isset($_SESSION['seeker_has_login'])) {
 
     <!-- Main Script -->
     <script src="js/script.js"></script>
-    <script src="js/profile/index.js"></script>
+    <script src="js/employer/index.js"></script>
 
     <!-- validation -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
