@@ -209,7 +209,8 @@ session_start();
               </p>
               <p><i class="fa-solid fa-money-bill p-2"></i>10,000-15,000</p>
               <p><i class="fa-regular fa-clock p-2"></i>Full Time</p>
-              <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt nunc lorem, at
+              <h3>Description:</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt nunc lorem, at
                 pharetra nisl scelerisque ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
                 cubilia curae; Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                 egestas.</p>
