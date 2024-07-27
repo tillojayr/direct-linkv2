@@ -3,6 +3,7 @@
 require __DIR__.'/vendor/autoload.php';
 
 use Google\Cloud\Firestore\FirestoreClient;
+use Google\Cloud\Firestore\FieldValue;
 
 class FirestoreService
 {
@@ -22,6 +23,10 @@ class FirestoreService
     public function insertData($collection, $document, $documentId = null)
     {
         $collectionRef = $this->firestore->collection($collection);
+
+        if($collection == 'employers'){
+            $document['posted_jobs'] = [];
+        }
 
         if ($documentId) {
             $docRef = $collectionRef->document($documentId);
@@ -66,13 +71,26 @@ class FirestoreService
 
         $documents = $collectionReference->documents();
         $results = [];
+        $count = 0;
 
         foreach ($documents as $document) {
             if ($document->exists()) {
-                $results[] = $document->data();
+                $results[$count] = $document->data();
+                $results[$count]['id'] = $document->id();
             }
+            $count++;
         }
 
         return $results;
+    }
+
+    public function addPostedJobToEmployer($employerId, $jobId)
+    {
+        $docRef = $this->firestore->collection('employers')->document($employerId);
+
+        // Use Firestore's arrayUnion to add the job ID to the posted_jobs array
+        $docRef->update([
+            ['path' => 'posted_jobs', 'value' => FieldValue::arrayUnion([$jobId])]
+        ]);
     }
 }

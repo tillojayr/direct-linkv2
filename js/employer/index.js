@@ -9,6 +9,7 @@ let count = 0;
 $(function(){
     // $(this).scrollTop(0);
     window.scrollTo(0, 0);
+    fetchJobPostings();
     fetchuserProfile();
   })
   
@@ -240,4 +241,31 @@ function saveJobPosting(formData) {
         alert('Form submission failed!');
     }
 });
+}
+
+function fetchJobPostings(){
+  $.ajax({
+    url: 'php_scripts/employer/fetchJobPostings.php',
+    type: 'POST',
+    dataType: 'json',
+    success: function(response) {
+      for(let i=0; i<response.length; i++){
+        $('#job_postings').append(`
+          <div class="mb-4 btn btn-light shadow" style="background-color: #eee; width: 100%;">
+            <div class="d-flex">
+              <div class="col p-3" >
+                <h3 class="">${response[i]['job_title']}</h3>
+                <p>
+                  ${response[i]['job_details']}
+                </p>
+              </div>
+            </div>
+          </div>
+        `);
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        alert('Form submission failed!');
+    }
+  });
 }
