@@ -223,6 +223,69 @@ session_start();
               </div>
           </div>
       </div>
+
+    <div class="modal fade" id="view_job_posting_modal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-secondary text-white">
+            <h5 class="modal-title" id="exampleModalLabel1">View Job Posting</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="job_posting_form">
+            <div class="modal-body">
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group col mb-3">
+                    <label class="form-label" for="job_title">Job Title</label>
+                    <input type="text" class="form-control" id="job_title" name="job_title" required/>
+                  </div>
+                  <div class="form-group col mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" required/>
+                  </div>
+                  <div class="form-group col mb-3">
+                    <label class="form-label" for="type">Type</label>
+                    <select class="form-select" name="type" id="type" required>
+                      <option value="Full Time">Full Time</option>
+                      <option value="Part Time">Part Time</option>
+                    </select>
+                  </div>
+                  <div class="form-group col mb-3">
+                    <label class="form-label" for="type1">Type1</label>
+                    <select class="form-select" name="type1" id="type1" required>
+                      <option value="Onsite">Onsite</option>
+                      <option value="Remote">Remote</option>
+                    </select>
+                  </div>
+                  <div class="form-group col mb-3">
+                    <label class="form-label" for="salary_range">Salary Range</label>
+                    <input type="text" class="form-control" id="salary_range" name="salary_range" required/>
+                  </div>
+                  <div class="mb-3">
+                      <label for="job_details" class="form-label">Job Details</label>
+                      <textarea class="form-control" id="job_details" name="job_details" rows="8" required></textarea>
+                  </div>
+                  <hr class="my-4" />
+                  <label for="requirements" class="form-label">Add Requirements</label>
+                  <div id="newinput"></div>
+                    <!-- <button id="rowAdder" type="button" class="btn btn-dark">
+                        <span class="bi bi-plus-square-dotted">
+                        </span> ADD
+                    </button> -->
+                    <div class="d-grid gap-2 mb-3">
+                      <button class="btn btn-primary" id="rowAdder" type="button">Add Job Posting</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" id="add_job_posting_save_btn" class="btn btn-success px-4">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Javascript -->
     <script>
 

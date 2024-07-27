@@ -23,6 +23,9 @@ function fetchJobPostings(){
                       </p>
                     </div>
                   </div>
+                  <div class="d-flex justify-content-end p-3">
+                    <button class="btn btn-primary apply_now_btn" value="${response[i]['id']}">Apply Now</button>
+                  </div>
                 </div>
               `)
             }
@@ -32,3 +35,9 @@ function fetchJobPostings(){
         }
     });
 }
+
+$(document).on('click', '.apply_now_btn', function(){
+
+    const documentId = $(this).val();
+    $('#view_job_posting_modal').modal('show');
+})
