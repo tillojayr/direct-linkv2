@@ -28,6 +28,10 @@ class FirestoreService
             $document['posted_jobs'] = [];
         }
 
+        if($collection == 'job_postings'){
+            $document['requirements'] = [];
+        }
+
         if ($documentId) {
             $docRef = $collectionRef->document($documentId);
             $docRef->set($document);
@@ -84,13 +88,16 @@ class FirestoreService
         return $results;
     }
 
-    public function addPostedJobToEmployer($employerId, $jobId)
+    public function addValueToArrayField($collection, $field, $documentId, $datas)
     {
-        $docRef = $this->firestore->collection('employers')->document($employerId);
+        $docRef = $this->firestore->collection($collection)->document($documentId);
 
         // Use Firestore's arrayUnion to add the job ID to the posted_jobs array
-        $docRef->update([
-            ['path' => 'posted_jobs', 'value' => FieldValue::arrayUnion([$jobId])]
-        ]);
+        foreach($datas as $data){
+            // var_dump($data);
+            $docRef->update([
+                ['path' => $field, 'value' => FieldValue::arrayUnion([$data])]
+            ]);
+        }
     }
 }

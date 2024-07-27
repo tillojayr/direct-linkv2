@@ -20,8 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $job_postings = $firestoreService->fetchData('employers', $_SESSION['user_id']);
 
     // var_dump($job_postings['posted_jobs']);
+    $data = array();
     foreach($job_postings['posted_jobs'] as $posting){
         $result = fetchJobPosting($posting);
+        foreach($job_postings as $key => $value){
+            $result[$key] = $value;
+        }
         $data[] = $result;
     }
 

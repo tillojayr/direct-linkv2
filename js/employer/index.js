@@ -147,7 +147,7 @@ $("#rowAdder").click(function () {
   count ++;
   newRowAdd =
       '<div id="row"> <div class="input-group my-2">' +
-      '<input type="text" class="form-control m-input" name="requirement'+count+'" id="requirement'+count+'" required><div class="input-group-prepend">' +
+      '<input type="text" class="form-control m-input" name="requirement_'+count+'" id="requirement'+count+'" required><div class="input-group-prepend">' +
       '<button class="btn btn-danger" id="DeleteRow" type="button">' +
       '<i class="bi bi-trash"></i> X</button> </div>' +
       ' </div> </div>';
@@ -192,12 +192,21 @@ $("#add_job_posting_save_btn").click(function () {
 
         // Serialize the form data and append to the FormData object
         var formSerializedArray = $('#job_posting_form').serializeArray();
+        let requirements = '';
         $.each(formSerializedArray, function(index, field) {
+          const field_name = field.name;
+          const substring = field_name.substring(0, field_name.indexOf("_"));
+          if(substring === 'requirement'){
+            requirements += field.value + '+++';
+          }
+          else{
             formData.append(field.name, field.value);
+          }
         });
 
-        saveJobPosting(formData)
-        console.log($('#job_posting_form').serialize());
+        formData.append('requirements', requirements);
+        saveJobPosting(formData);
+        // console.log($('#job_posting_form').serialize());
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
@@ -243,29 +252,101 @@ function saveJobPosting(formData) {
 });
 }
 
-function fetchJobPostings(){
+// function fetchJobPostings(){
+//   $.ajax({
+//     url: 'php_scripts/employer/fetchJobPostings.php',
+//     type: 'POST',
+//     dataType: 'json',
+//     success: function(response) {
+//       for(let i=0; i<response.length; i++){
+//         $('#job_postings').append(`
+//           <div class="mb-4 btn btn-light shadow" style="background-color: #eee; width: 100%;">
+//             <div class="d-flex">
+//               <div class="col p-3" >
+//                 <h3 class="">${response[i]['job_title']}</h3>
+//                 <p>
+//                   ${response[i]['job_details']}
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+//         `);
+//       }
+//     },
+//     error: function(jqXHR, textStatus, errorThrown) {
+//         alert('Form submission failed!');
+//     }
+//   });
+// }
+
+function fetchJobPostings() {
   $.ajax({
-    url: 'php_scripts/employer/fetchJobPostings.php',
-    type: 'POST',
-    dataType: 'json',
-    success: function(response) {
-      for(let i=0; i<response.length; i++){
-        $('#job_postings').append(`
-          <div class="mb-4 btn btn-light shadow" style="background-color: #eee; width: 100%;">
-            <div class="d-flex">
-              <div class="col p-3" >
-                <h3 class="">${response[i]['job_title']}</h3>
-                <p>
-                  ${response[i]['job_details']}
-                </p>
+    url: "php_scripts/employer/fetchJobPostings.php",
+    type: "POST",
+    dataType: "json",
+    success: function (response) {
+      console.log(response);
+      for (let i = 0; i < response.length; i++) {
+        $("#job_posting_container").append(`
+        <div class="shadow p-3 mb-5 bg-white rounded job-listing bg-white mt-5">
+          <div class="col p-3">
+            <div class="row">
+              <div class="d-flex justify-content-between">
+                <div class="col-md-2 ">
+                  <img src="assets/images/company_logos/${response[i]["path"]}" alt="Company Logo" class="img-fluid">
+                </div>
+                <div>
+                  <button class="btn btn-primary mx-3 apply_now_btn d-none" value="${response[i]["id"]}">Apply Now</button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h2>${response[i]["job_title"]}</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="mb-1"><i class="fa-solid fa-building p-2"></i>${response[i]["company_name"]}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="mb-1"><i class="fa-solid fa-map-location p-2"></i>${response[i]["location"]}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="mb-1"><i class="fa-solid fa-money-bill p-2"></i>${response[i]["salary_range"]}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="mb-1"><i class="fa-regular fa-clock p-2"></i>${response[i]["type"]}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p><i class="fa-solid fa-house-laptop p-2"></i>${response[i]["type1"]}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Descriptions:</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>${response[i]["job_details"]}</p>
               </div>
             </div>
           </div>
-        `);
+        </div>
+            `);
       }
     },
-    error: function(jqXHR, textStatus, errorThrown) {
-        alert('Form submission failed!');
-    }
+    error: function (jqXHR, textStatus, errorThrown) {
+      alert("Form submission failed!");
+    },
   });
 }

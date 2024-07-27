@@ -1,5 +1,6 @@
 <?php
-
+date_default_timezone_set("Asia/Manila");
+// var_dump(date("Y-m-d h:i:sa"));
 session_start();
 // main.php
 include '../FirestoreService.php';
@@ -46,11 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $datas['created_on'] = date("Y-m-d h:i:sa");
     $datas['posted_by'] = $_SESSION['user_id'];
+
     $jobposting_collection = 'job_postings';
 
     $documentId = $firestoreService->insertData($jobposting_collection, $datas);
 
-    $temp = $firestoreService->addPostedJobToEmployer($_SESSION['user_id'], $documentId);
+    $requirements_datas = explode("+++",$datas['requirements']);
+    array_pop($requirements_datas);
+    $requirements = $firestoreService->addValueToArrayField('job_postings', 'requirements', $documentId, $requirements_datas);
+
+    $temp = $firestoreService->addValueToArrayField('employers', 'posted_jobs', $_SESSION['user_id'], [$documentId]);
     // $response = $firestoreService->updateData($table, $data, $id);
 
     echo json_encode($documentId);
