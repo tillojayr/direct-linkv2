@@ -105,18 +105,18 @@
           <div class="d-grid gap-2 mb-3">
             <button class="btn btn-secondary" id="add_job_posting_btn" type="button">Add Job Posting</button>
           </div>
+          <div id="job_postings">
+            
+          </div>
           <div class="mb-4 btn btn-light shadow" style="background-color: #eee;">
             <div class="d-flex">
-                  <!-- <div class="col-3 p-3" style="object-fit:cover;">
-                    <img height="100" width="100"  src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/266061678/original/ed2105546b534db4e4ebd2635a9184b3e244912e/customized-2x2-id-picture-with-or-without-formal-attire.jpeg" alt="">
-                  </div> -->
-                  <div class="col p-3" >
-                    <h3 class="">Job Title</h3>
-                    <p>
-                      Description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quod dolor? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque ullam molestiae ea blanditiis, optio quaerat iure totam enim nostrum! Soluta quae doloribus et iure, corrupti deserunt voluptatibus fugiat rerum architecto. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet nemo aperiam voluptates, ipsam quod nesciunt amet maiores suscipit? Eos voluptates qui quaerat animi fuga sunt? Blanditiis non doloribus fuga minima?
-                    </p>
-                  </div>
-                </div>
+              <div class="col p-3" >
+                <h3 class="">Job Title</h3>
+                <p>
+                  Description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quod dolor? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque ullam molestiae ea blanditiis, optio quaerat iure totam enim nostrum! Soluta quae doloribus et iure, corrupti deserunt voluptatibus fugiat rerum architecto. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet nemo aperiam voluptates, ipsam quod nesciunt amet maiores suscipit? Eos voluptates qui quaerat animi fuga sunt? Blanditiis non doloribus fuga minima?
+                </p>
+              </div>
+            </div>
           </div>
           <div class="mb-4 btn btn-light shadow" style="background-color: #eee;">
             <div class="d-flex">

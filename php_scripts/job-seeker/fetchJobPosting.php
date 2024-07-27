@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $jobPostings = $firestoreService->fetchDataWhere('job_postings');
 
     foreach($jobPostings as &$jobposting){
-        // var_dump($jobposting);
+
         $employers_data = fetchEmployerData($jobposting['posted_by']);
 
         foreach($employers_data as $key => $value){

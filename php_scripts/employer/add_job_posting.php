@@ -50,10 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $documentId = $firestoreService->insertData($jobposting_collection, $datas);
 
+    $temp = $firestoreService->addPostedJobToEmployer($_SESSION['user_id'], $documentId);
     // $response = $firestoreService->updateData($table, $data, $id);
 
     echo json_encode($documentId);
-
 } else {
     echo "Invalid request method.\n";
 }
