@@ -54,6 +54,7 @@ else{
 
     <!-- # Main Style Sheet -->
     <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" href="css/profile.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <style>
@@ -125,24 +126,62 @@ else{
         <a href="#" id="logout_btn">Logout</a>
       </div>
     </nav>
-    <div class="container"></div>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-sm-5" id="job_posting_container">
+          <h2 class="text-center">Job Offers</h2>
+          
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <h2 class="text-center">Reports</h2>
+          <div class=" m-5" style="background-color: #eee;">content 1</div>
+          <div class="row justify-content-around">
+            <div class="col-sm-4 col-6 mb-3" style="background-color: #eee; height: 200px;">content 2</div>
+            <div class="col-sm-4 col-6 mb-3" style="background-color: #eee; height: 200px;">content 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="line my-4" style="height: 2px;
+      background-color: #333;"></div>
+    <!-- Javascript -->
+    <script>
 
-    <!-- # JS Plugins -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+      const navLinks = document.getElementById("navLinks");
+      
+      function navClose(){
+        navLinks.style.right = "-200px";
+      }
+      function navOpen(){
+        navLinks.style.right = "0";
+      }
+    </script>
+
+     <!-- # JS Plugins -->
+     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/bootstrap.min.js"></script>
     <script src="plugins/slick/slick.min.js"></script>
     <script src="plugins/scrollmenu/scrollmenu.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css "></script>
+
     <!-- Main Script -->
     <script src="js/script.js"></script>
     <script src="js/register/index.js"></script>
-    
+    <script src="js/job_seeker/index.js"></script>
+
     <!-- validation -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"></script>
   </body>
 </html>
