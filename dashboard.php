@@ -1,24 +1,24 @@
 <?php 
 
 session_start();
-if (isset($_SESSION['seeker_has_login'])) {
-  if($_SESSION['seeker_has_login'] == false || $_SESSION['role'] != 'JOB SEEKER'){
-    if($_SESSION['role'] == 'ADMIN'){
-      header('Location: login-admin.php');
-    }
-    else if($_SESSION['role'] == 'EMPLOYER'){
-      header('Location: login-employer.php');
-    }
-    else{
-      header('Location: page-not-found.html');
-    }
-    exit();
-  }
-}
-else{
-  header('Location: login-jobseeker.php');
-  exit();
-}
+// if (isset($_SESSION['seeker_has_login'])) {
+//   if($_SESSION['seeker_has_login'] == false || $_SESSION['role'] != 'JOB SEEKER'){
+//     if($_SESSION['role'] == 'ADMIN'){
+//       header('Location: login-admin.php');
+//     }
+//     else if($_SESSION['role'] == 'EMPLOYER'){
+//       header('Location: login-employer.php');
+//     }
+//     else{
+//       header('Location: page-not-found.html');
+//     }
+//     exit();
+//   }
+// }
+// else{
+//   header('Location: login-jobseeker.php');
+//   exit();
+// }
 
 ?>
 
@@ -57,10 +57,13 @@ else{
     <link rel="stylesheet" href="css/profile.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <style>
-      body {
-        background: linear-gradient(to right, #a8e5b8, #a2d0ea);
-      }
+      
     </style>
   </head>
 
@@ -68,7 +71,7 @@ else{
     <!-- navigation -->
     <nav
       style="height: 80px"
-      class="border border-bottom border-3 border-dark mb-5 d-flex justify-content-between align-items-center px-5">
+      class="search-button mb-5 d-flex justify-content-between align-items-center bg-primary">
       <div class="d-flex">
         <input
           type="text"
@@ -77,7 +80,9 @@ else{
           class="form-control form-control-lg"
           required
           style="width: 400px" />
-        <button class="btn btn-dark mx-3">Search</button>
+        <button class="button1 btn btn-secondary mx-3">Search</button>
+        <button class="button2 btn  btn-secondary mx-3" data-toggle="modal" data-target="#searchModal">Search</button>
+
       </div>
       <div class="navbar-links">
         <a href=""
@@ -85,7 +90,7 @@ else{
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="size-10 text-dark"
+            class="size-10 text-white"
             style="height: 3rem; width: 3rem">
             <path
               d="M5.85 3.5a.75.75 0 0 0-1.117-1 9.719 9.719 0 0 0-2.348 4.876.75.75 0 0 0 1.479.248A8.219 8.219 0 0 1 5.85 3.5ZM19.267 2.5a.75.75 0 1 0-1.118 1 8.22 8.22 0 0 1 1.987 4.124.75.75 0 0 0 1.48-.248A9.72 9.72 0 0 0 19.266 2.5Z" />
@@ -100,7 +105,7 @@ else{
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="size-10 text-dark"
+            class="size-10 text-white"
             style="height: 3rem; width: 3rem">
             <path
               fill-rule="evenodd"
@@ -115,7 +120,7 @@ else{
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="size-10 text-dark"
+            class="size-10 text-white"
             style="height: 3rem; width: 3rem">
             <path
               stroke-linecap="round"
@@ -123,14 +128,66 @@ else{
               d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
         </a>
-        <a href="#" id="logout_btn">Logout</a>
+        <a class="text-white" style="text-decoration: none ;" href="#" id="logout_btn">Logout</a>
       </div>
     </nav>
     <div class="container mt-4">
       <div class="row">
         <div class="col-lg-6 col-md-12 mb-sm-5" id="job_posting_container">
           <h2 class="text-center">Job Offers</h2>
-          
+          <div class="shadow p-3 mb-5 bg-white rounded job-listing bg-white mt-5">
+            <div class="col p-3">
+              <div class="row">
+                <div class="d-flex justify-content-between">
+                  <div class="col-md-2 ">
+                      <img src="https://shmector.com/_ph/13/188552034.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div>
+                    <button class="btn btn-primary mx-3">Apply Now</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <h4>Front End Developer</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                    <p>Ramos, Cebu City</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                    <p>10,000-15,000</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+                </div>
+              </div>
+           </div>
+          </div>
+          <div class=" mt-5">
+            <div class="col job-listing p-3">
+                <div class="col-md-2">
+                    <img src="https://shmector.com/_ph/13/188552034.png" alt="Company Logo" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h3>Front End Developer</h3>
+                </div>
+                <div class="col-md-4">
+                    <p>Ramos, Cebu City</p>
+                </div>
+                <div class="col-md-4">
+                    <p>10,000-15,000</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+                </div>
+           </div>
+          </div>
         </div>
         <div class="col-lg-6 col-md-12">
           <h2 class="text-center">Reports</h2>
@@ -144,6 +201,28 @@ else{
     </div>
     <div class="line my-4" style="height: 2px;
       background-color: #333;"></div>
+      <!-- Search Modal -->
+      <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="searchModalLabel">Search Jobs</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form>
+                          <div class="form-group">
+                              <label for="jobTitle">Job Title</label>
+                              <input type="text" class="form-control" id="jobTitle" placeholder="Enter job title">
+                          </div>
+                          <button type="submit" class="btn btn-primary">Search</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
 
     <div class="modal fade" id="view_job_posting_modal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
       <div class="modal-dialog modal-lg">
