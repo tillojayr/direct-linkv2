@@ -1,8 +1,6 @@
 body {
   color: #8e9194;
   /* background-color: #f4f6f9; */
-  background: linear-gradient(to right, #a8e5b8, #a2d0ea);
-  background-repeat: repeat-y;
 }
 .avatar-xl img {
   width: 110px;
@@ -37,34 +35,39 @@ img {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 } */
-
-nav .fa-solid{
- display: none;
+@media only screen and (max-width: 1920px) {
+  button.button2{
+    display: none;
+  }
+  button.button1{
+    display: inherit;
+  }
 }
+
 @media only screen and (max-width: 360px) {
-  nav .navbar-links{
-    position: absolute;
-    background-color: #fff;
-    width: 100px;
-    height: 100vh;
-    right: 0;
-    top: 0;
-    transition: 0.5s;
-    z-index: 1;
-  }
-
-  nav .navbar-links a{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 28px;
-  }
-  nav .fa-solid{
-    color: #000;
-    display: block;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 15px;
-  }
+ input#search_job{display: none;}
+.search-button{
+  padding-left: 0;
+  padding-right: 10px;
+ }
+ button.button1 {
+  display: none;
+}
+button.button2 {
+  display: inherit;
 }
 
+}
+.search-button{
+  padding-left: 10px;
+  padding-right: 20px;
+}
+.job-listing{
+  border: 1px solid #9a9696;
+  border-radius: 10px;
+}
+.job-listing:hover {
+  
+  border: 3px solid rgb(40, 40, 245);
+  border-radius: 10px;
+}
