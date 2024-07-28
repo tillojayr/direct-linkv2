@@ -88,6 +88,51 @@ class FirestoreService
         return $results;
     }
 
+    public function fetchDataWhereLike($collection, $conditions = [])
+    {
+        $collectionReference = $this->firestore->collection($collection);
+
+        // Apply general conditions (excluding 'like' conditions)
+        if (!empty($conditions)) {
+            foreach ($conditions as $field => $value) {
+                if (!(is_array($value) && isset($value['like']))) {
+                    $collectionReference = $collectionReference->where($field, '=', $value);
+                }
+            }
+        }
+
+        $documents = $collectionReference->documents();
+        $results = [];
+
+        foreach ($documents as $document) {
+            if ($document->exists()) {
+                $match = true;
+
+                // Apply 'like' conditions manually
+                foreach ($conditions as $field => $value) {
+                    if (is_array($value) && isset($value['like'])) {
+                        $likeValue = strtolower($value['like']);
+                        $fieldValue = strtolower($document->data()[$field] ?? '');
+
+                        if (strpos($fieldValue, $likeValue) === false) {
+                            $match = false;
+                            break;
+                        }
+                    }
+                }
+
+                if ($match) {
+                    $results[] = $document->data();
+                }
+            }
+        }
+
+        return $results;
+    }
+
+
+
+
     public function addValueToArrayField($collection, $field, $documentId, $datas)
     {
         $docRef = $this->firestore->collection($collection)->document($documentId);

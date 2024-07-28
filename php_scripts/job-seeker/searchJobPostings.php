@@ -18,8 +18,14 @@ function fetchEmployerData($document_id){
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $jobPostings = $firestoreService->fetchDataWhere('job_postings');
+    $search_value = $_POST['search_value'];
 
+    $conditions = [
+        'job_title' => ['like' => $search_value] // This will search for documents where the 'name' field starts with 'Joh'
+    ];
+
+    $jobPostings = $firestoreService->fetchDataWhereLike('job_postings', $conditions);
+    
     foreach($jobPostings as &$jobposting){
 
         $employers_data = fetchEmployerData($jobposting['posted_by']);
@@ -28,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $jobposting[$key] = $value;
         }
     }
+    
     echo json_encode($jobPostings);
 }
 

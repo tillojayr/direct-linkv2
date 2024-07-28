@@ -8,6 +8,7 @@ $(function () {
 });
 
 function fetchAdditionalJobPostings(){
+  console.log(arr);
   for (let i = 0; i < number_of_rendered_posts; i++) {
     if(arr[rendered_job_postings]){
       $("#job_posting_container").append(`
@@ -124,7 +125,7 @@ function fetchJobPost(jobpost_id) {
         $('#basic_requirements').empty()
         for (let i = 0; i < requirements.length; i++) {
             $('#basic_requirements').append(`
-                <li><strong>${requirements[i]}</strong></li>  
+                <li><strong>${requirements[i]}</strong></li>
             `);
         }
         $("#apply").attr("href", "apply.php?documentid="+response['id']);
@@ -145,3 +146,44 @@ window.onscroll = function(ev) {
     }
   }
 };
+
+$('#search_btn').click(function(){
+  let search_value = $('#search_job').val();
+  $('#job_posting_container').empty();
+  rendered_job_postings = 0;
+  if(search_value != ''){
+    searchJobs(search_value);
+  }
+  else{
+    fetchJobPostings();
+  }
+})
+
+$('#search_btn2').click(function(){
+  let search_value = $('#searchInput').val();
+  $('#job_posting_container').empty();
+  rendered_job_postings = 0;
+  if(search_value != ''){
+    searchJobs(search_value);
+  }
+  else{
+    fetchJobPostings();
+  }
+  $('#searchModal').modal('hide');
+})
+
+function searchJobs(search_value){
+  $.ajax({
+    url: "php_scripts/job-seeker/searchJobPostings.php",
+    type: "POST",
+    data: {search_value: search_value},
+    dataType: "json",
+    success: function (response) {
+      arr = response;
+      fetchAdditionalJobPostings();
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      alert("Form submission failed!");
+    },
+  });
+}

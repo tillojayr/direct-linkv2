@@ -16,12 +16,24 @@ function fetchEmployerData($document_id){
 
 }
 
+function fetchAppliedJobs(){
+
+    $firestoreService1 = new FirestoreService();
+
+    $users_data = $firestoreService1->fetchData('job_seekers', $_SESSION['user_id']);
+
+    return $users_data['applied_jobs'];
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     $documentid = $_GET['documentid'];
     $jobPosting = $firestoreService->fetchData('job_postings', $documentid);
 
     $employers_data = fetchEmployerData($jobPosting['posted_by']);
+    $applied_jobs = fetchAppliedJobs();
+    (in_array($documentid, $applied_jobs)) ? $already_applied = true : $already_applied = false;
     foreach($employers_data as $key => $value){
         $jobPosting[$key] = $value;
     }
@@ -62,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     </nav>
 
     <div class="container mb-5">
+        <?php if ($already_applied) { echo '<div class="alert alert-warning" role="alert">You already applied to this job post.</div>'; } ?>
         <div class="card p-2">
             <div class="card-body">
                 <div class="d-flex">
@@ -102,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
                     </ul>
                 </div>
                 <div class="d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-success" id="submit_application_button" value="<?php echo $documentid ?>">Submit Application</button>
+                    <button type="button" class="btn btn-success" id="submit_application_button" value="<?php echo $documentid ?>" <?php if ($already_applied) { echo 'disabled'; } ?>>Submit Application</button>
                 </div>
             </div>
         </div>
