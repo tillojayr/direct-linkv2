@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     foreach($employers_data as $key => $value){
         $jobPosting[$key] = $value;
     }
+    $jobPosting['id'] = $jobpost_id;
     echo json_encode($jobPosting);
 }
 ?>

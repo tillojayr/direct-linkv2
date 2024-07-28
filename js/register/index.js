@@ -1,5 +1,4 @@
 $(function () {
-  console.log("asd");
 });
 
 $("#register_form").submit(function (e) {
@@ -20,7 +19,6 @@ function saveRegistration($formData) {
     type: "POST",
     data: $formData,
   }).then(function (response) {
-    console.log(response);
     if(response == true){
       const role = $('#role').val();
       Swal.fire({
